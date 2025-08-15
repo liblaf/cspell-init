@@ -2,8 +2,8 @@ import { defineConfig } from "bunup";
 import { exports, shims } from "bunup/plugins";
 
 export default defineConfig({
-  entry: ["src/index.ts"],
-  format: ["esm", "cjs", "iife"],
+  entry: ["src/index.ts", "src/bin/cspell-init.ts"],
+  format: ["esm"],
   minify: true,
   dts: true,
   target: "bun",
