@@ -23,5 +23,6 @@ words:
   - nuxt
   - pids
   - stricli
+  - venv
   - vuepress
   - wscript
