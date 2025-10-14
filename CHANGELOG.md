@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.2](https://github.com/liblaf/cspell-init/compare/v0.1.1...v0.1.2) (2025-10-14)
+
+
+### 🐛 Bug Fixes
+
+* **types:** add explicit types and tsc script ([2a82358](https://github.com/liblaf/cspell-init/commit/2a82358effa2f39b5be304a24678d1f15b4d0734))
+
+
+### 🛠 Builds
+
+* migrate to shared config and simplify build process ([dce5c55](https://github.com/liblaf/cspell-init/commit/dce5c5519cc136d5f32fc87c844c12ceba66d7f4))
+
 ## [0.1.1](https://github.com/liblaf/cspell-init/compare/v0.1.0..v0.1.1) - 2025-08-25
 
 ### ⚡ Performance Improvements
