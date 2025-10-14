@@ -38,7 +38,8 @@
   "scripts": {
     "build": "bunup",
     "lint": "biome check --write",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "tsc": "tsc --noEmit"
   },
   "dependencies": {
     "@stricli/auto-complete": "^1.2.1",
