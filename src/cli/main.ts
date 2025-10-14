@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import type { Command } from "@stricli/core";
 import { buildCommand } from "@stricli/core";
 import type { CSpellSettings, Issue } from "cspell";
 import { getDefaultReporter, lint } from "cspell";
@@ -23,14 +24,24 @@ const DEFAULT_IGNORE: string[] = [
   "go.sum",
 ];
 
-// ? I don't know why but ignoring these paths significantly improves performance.
 const DEFAULT_IGNORE_EXTEND: string[] = DEFAULT_IGNORE.concat([
+  // ? I don't know why but ignoring these paths significantly improves performance.
   ".*cache/",
   ".venv/",
   "dist/",
   "node_modules/",
   "site/",
   "target/",
+  // 3D Models
+  "*.glb",
+  "*.landmarks.json",
+  "*.obj",
+  "*.ply",
+  "*.series",
+  "*.stl",
+  "*.vti",
+  "*.vtp",
+  "*.vtu",
 ]);
 
 export const DEFAULT_SETTINGS: CSpellSettings = {
@@ -62,7 +73,7 @@ type Flags = {
   readonly "save-config"?: string;
 };
 
-export const main = buildCommand({
+export const main: Command<Context> = buildCommand({
   docs: { brief: description },
   async func(this: Context, flags: Flags): Promise<void> {
     const root = await gitRoot();
