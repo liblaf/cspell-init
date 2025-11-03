@@ -1,7 +1,7 @@
 {
   "name": "@liblaf/cspell-init",
   "description": "TODO",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "type": "module",
   "files": [
     "dist"
