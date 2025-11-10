@@ -7,7 +7,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.2.0](https://github.com/liblaf/cspell-init/releases/tag/v0.2.0) - 2025-11-03
+## [0.2.1](https://github.com/liblaf/cspell-init/releases/tag/v0.2.1) - 2025-11-10
+
+### 🐛 Bug Fixes
+
+- **release:** change bun install to bun ci for better dependency management - [1af1239](https://github.com/liblaf/cspell-init/commit/1af1239529b752b6dcbbe0c2f5cdfdc203427508) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+
+## [0.2.0](https://github.com/liblaf/cspell-init/releases/tag/v0.2.0) - 2025-11-04
 
 ### 💥 BREAKING CHANGES
 
@@ -15,20 +25,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ♻ Code Refactoring
 
-- **(cli)** Consolidate cspell configuration and rename flag - [f27cc1d](https://github.com/liblaf/cspell-init/commit/f27cc1da9a24c9aee4a4a1d2c4f658ffe234389c) by [@liblaf](https://github.com/liblaf)
+- **cli:** Consolidate cspell configuration and rename flag - [f27cc1d](https://github.com/liblaf/cspell-init/commit/f27cc1da9a24c9aee4a4a1d2c4f658ffe234389c) by [@liblaf](https://github.com/liblaf)
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
-- [@liblaf[bot]](https://github.com/apps/liblaf) made their first contribution in [#18](https://github.com/liblaf/cspell-init/pull/18)
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
 - [@copier-update[bot]](https://github.com/apps/copier-update) made their first contribution in [#12](https://github.com/liblaf/cspell-init/pull/12)
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#11](https://github.com/liblaf/cspell-init/pull/11)
+- [@renovate[bot]](https://github.com/apps/renovate)
 
 ## [0.1.2](https://github.com/liblaf/cspell-init/releases/tag/v0.1.2) - 2025-10-14
 
 ### 🐛 Bug Fixes
 
-- **(types)** add explicit types and tsc script - [2a82358](https://github.com/liblaf/cspell-init/commit/2a82358effa2f39b5be304a24678d1f15b4d0734) by [@liblaf](https://github.com/liblaf)
+- **types:** add explicit types and tsc script - [2a82358](https://github.com/liblaf/cspell-init/commit/2a82358effa2f39b5be304a24678d1f15b4d0734) by [@liblaf](https://github.com/liblaf)
 
 ### 🛠 Builds
 
@@ -44,7 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ⚡️ Performance Improvements
 
-- **(cli)** improve performance by excluding common directories from spell checking - [eb6b3fc](https://github.com/liblaf/cspell-init/commit/eb6b3fcde51af435dcdc45fe201a5bcf8a6d8a93) by [@liblaf](https://github.com/liblaf)
+- **cli:** improve performance by excluding common directories from spell checking - [eb6b3fc](https://github.com/liblaf/cspell-init/commit/eb6b3fcde51af435dcdc45fe201a5bcf8a6d8a93) by [@liblaf](https://github.com/liblaf)
 
 ### ❤️ Contributors
 
