@@ -52,6 +52,7 @@ export const main: Command<Context> = buildCommand({
       ignoreRandomStrings: true,
       issues: true,
       issuesSummaryReport: true,
+      maxFileSize: "500KB",
       progress: true,
       relative: true,
       root,

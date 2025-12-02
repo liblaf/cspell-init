@@ -43,5 +43,6 @@ export const DEFAULT_SETTINGS: CSpellSettings = {
   enableGlobDot: true,
   ignorePaths: DEFAULT_IGNORE,
   ignoreRandomStrings: true,
+  maxFileSize: "500KB",
   useGitignore: true,
 };
