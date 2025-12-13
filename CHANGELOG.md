@@ -7,7 +7,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.2.2](https://github.com/liblaf/cspell-init/releases/tag/v0.2.2) - 2025-12-02
+## [0.2.3](https://github.com/liblaf/cspell-init/releases/tag/v0.2.3) - 2025-12-13
+
+### ✨ Features
+
+- **cli:** implement dynamic cspell configuration generation - [59f0940](https://github.com/liblaf/cspell-init/commit/59f0940fbd51ca7a9b53837403203a54172dbbbe) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
+- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#29](https://github.com/liblaf/cspell-init/pull/29)
+- [@liblaf[bot]](https://github.com/apps/liblaf) made their first contribution in [#27](https://github.com/liblaf/cspell-init/pull/27)
+
+## [0.2.2](https://github.com/liblaf/cspell-init/releases/tag/v0.2.2) - 2025-12-07
 
 ### ✨ Features
 
@@ -15,9 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
-- [@liblaf](https://github.com/liblaf) made their first contribution
-- [@liblaf[bot]](https://github.com/apps/liblaf) made their first contribution in [#24](https://github.com/liblaf/cspell-init/pull/24)
-- [@renovate[bot]](https://github.com/apps/renovate) made their first contribution in [#23](https://github.com/liblaf/cspell-init/pull/23)
+- [@liblaf[bot]](https://github.com/apps/liblaf)
+- [@liblaf](https://github.com/liblaf)
+- [@renovate[bot]](https://github.com/apps/renovate)
 
 ## [0.2.1](https://github.com/liblaf/cspell-init/releases/tag/v0.2.1) - 2025-11-10
 
