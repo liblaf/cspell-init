@@ -7,25 +7,17 @@ cache:
 caseSensitive: false
 enableGlobDot: true
 ignorePaths:
-  - .cspell.*
   - .git/
-  - "*-lock.*"
   - "*.lock"
   - cspell.*
-  - go.sum
 ignoreRandomStrings: true
+maxFileSize: 500KB
 useGitignore: true
 words:
   - bunup
   - direnv
   - dotenv
-  - jscoverage
-  - jspm
   - liblaf
   - nuxt
-  - pids
   - stricli
   - uuidgen
-  - venv
-  - vuepress
-  - wscript

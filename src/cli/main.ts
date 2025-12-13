@@ -2,17 +2,89 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import type { Command } from "@stricli/core";
 import { buildCommand } from "@stricli/core";
-import type { CSpellApplicationOptions, CSpellReporter, Issue } from "cspell";
+import { pathToFileURL } from "bun";
+import type {
+  CSpellApplicationOptions,
+  CSpellReporter,
+  CSpellSettings,
+  Issue,
+} from "cspell";
 import { getDefaultReporter, lint } from "cspell";
-import { $ } from "execa";
+import { GlobMatcher } from "cspell-glob";
+import { type SimpleGit, simpleGit } from "simple-git";
 import YAML from "yaml";
 import { description } from "../../package.json";
-import {
-  CONFIG_HEADER,
-  DEFAULT_IGNORE_EXTEND,
-  DEFAULT_SETTINGS,
-} from "../constants";
+import { CONFIG_HEADER, DEFAULT_SETTINGS } from "../constants";
 import type { Context } from "./context";
+
+type Flags = {
+  saveConfig?: string;
+  showPerfSummary?: boolean;
+};
+
+async function* filterIgnorePaths(
+  git: SimpleGit,
+  ignorePaths: string[],
+): AsyncGenerator<string> {
+  const files: string[] = (await git.raw(["ls-files", "-z"]))
+    .split("\0")
+    .filter(Boolean);
+  for (const pattern of ignorePaths) {
+    const matcher = new GlobMatcher([pattern], { mode: "exclude" });
+    for (const file of files) {
+      if (matcher.match(file)) {
+        yield pattern;
+        break;
+      }
+    }
+  }
+}
+
+async function makeSettings(git: SimpleGit): Promise<CSpellSettings> {
+  const settings: CSpellSettings = { ...DEFAULT_SETTINGS };
+  const ignorePaths: string[] = [".git/"];
+  for await (const pattern of filterIgnorePaths(
+    git,
+    settings.ignorePaths as string[],
+  ))
+    ignorePaths.push(pattern);
+  settings.ignorePaths = ignorePaths;
+  return settings;
+}
+
+async function makeOptions(
+  git: SimpleGit,
+  settings: CSpellSettings,
+  flags: Flags,
+): Promise<CSpellApplicationOptions> {
+  const root: string = await git.revparse(["--show-toplevel"]);
+  return {
+    cache: settings.cache?.useCache,
+    cacheStrategy: settings.cache?.cacheStrategy,
+    configSearch: false,
+    continueOnError: true,
+    defaultConfiguration: true,
+    dot: settings.enableGlobDot,
+    exclude: settings.ignorePaths as string[],
+    failFast: false,
+    gitignore: settings.useGitignore,
+    ignoreRandomStrings: settings.ignoreRandomStrings,
+    issues: true,
+    issuesSummaryReport: true,
+    maxFileSize: settings.maxFileSize as string,
+    progress: true,
+    relative: true,
+    root,
+    showPerfSummary: flags.showPerfSummary,
+    silent: false,
+    summary: true,
+    unique: true,
+    config: {
+      settings,
+      url: pathToFileURL(flags.saveConfig!),
+    },
+  };
+}
 
 async function saveConfig(
   file: string,
@@ -23,54 +95,25 @@ async function saveConfig(
   await fs.writeFile(file, data);
 }
 
-async function gitRoot(): Promise<string> {
-  const { stdout } = await $({
-    stderr: "inherit",
-  })`git rev-parse --show-toplevel`;
-  return stdout.trim();
-}
-
-type Flags = {
-  readonly saveConfig?: string;
-  readonly showPerfSummary?: boolean;
-};
-
 export const main: Command<Context> = buildCommand({
   docs: { brief: description },
   async func(this: Context, flags: Flags): Promise<void> {
-    const root: string = await gitRoot();
-    const options: CSpellApplicationOptions = {
-      cache: true,
-      cacheStrategy: "content",
-      configSearch: false,
-      continueOnError: true,
-      defaultConfiguration: true,
-      dot: true,
-      exclude: DEFAULT_IGNORE_EXTEND,
-      failFast: false,
-      gitignore: true,
-      ignoreRandomStrings: true,
-      issues: true,
-      issuesSummaryReport: true,
-      maxFileSize: "500KB",
-      progress: true,
-      relative: true,
-      root,
-      showPerfSummary: flags.showPerfSummary,
-      silent: false,
-      summary: true,
-      unique: true,
-      config: {
-        settings: DEFAULT_SETTINGS,
-        url: new URL("https://github.com/liblaf/cspell-init"),
-      },
-    };
+    const git: SimpleGit = simpleGit();
+    const root: string = await git.revparse(["--show-toplevel"]);
+    flags.saveConfig =
+      flags.saveConfig ?? path.join(root, ".config", "cspell.config.yaml");
+    await git.cwd(root);
+    const settings: CSpellSettings = await makeSettings(git);
+    const options: CSpellApplicationOptions = await makeOptions(
+      git,
+      settings,
+      flags,
+    );
     const reporter: Required<CSpellReporter> = getDefaultReporter(
       { ...options, fileGlobs: ["."] },
       options,
     );
-    const words = new Set();
-
+    const words: Set<string> = new Set();
     await lint(["."], options, {
       ...reporter,
       issue(issue: Issue): void {
@@ -78,13 +121,8 @@ export const main: Command<Context> = buildCommand({
         words.add(issue.text.toLowerCase());
       },
     });
-
-    const file =
-      flags.saveConfig ?? path.join(root, ".config", "cspell.config.yaml");
-    await saveConfig(file, {
-      ...DEFAULT_SETTINGS,
-      words: Array.from(words).sort(),
-    });
+    settings.words = Array.from(words).sort();
+    await saveConfig(flags.saveConfig, settings);
   },
   parameters: {
     flags: {

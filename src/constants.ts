@@ -6,42 +6,21 @@ export const CONFIG_HEADER = `\
 # DO NOT EDIT!
 `;
 
-export const DEFAULT_IGNORE: string[] = [
-  ".cspell.*",
-  ".git/",
-  "*-lock.*",
-  "*.lock",
-  "cspell.*",
-  "go.sum",
-];
-
-export const DEFAULT_IGNORE_EXTEND: string[] = DEFAULT_IGNORE.concat([
-  // ? I don't know why but ignoring these paths significantly improves performance.
-  // ? Maybe I can remove them after <https://github.com/streetsidesoftware/cspell/issues/7953> is resolved.
-  ".*cache/",
-  ".venv/",
-  "dist/",
-  "node_modules/",
-  "site/",
-  "target/",
-  // 3D Models
-  "*.glb",
-  "*.landmarks.json",
-  "*.obj",
-  "*.ply",
-  "*.series",
-  "*.stl",
-  "*.vti",
-  "*.vtp",
-  "*.vtu",
-]);
-
 export const DEFAULT_SETTINGS: CSpellSettings = {
   allowCompoundWords: true,
   cache: { useCache: true },
   caseSensitive: false,
   enableGlobDot: true,
-  ignorePaths: DEFAULT_IGNORE,
+  ignorePaths: [
+    ".cspell.*",
+    "*-lock.*",
+    "*.lock",
+    "*.vtm",
+    "*.vtp",
+    "*.vtu",
+    "cspell.*",
+    "go.sum",
+  ],
   ignoreRandomStrings: true,
   maxFileSize: "500KB",
   useGitignore: true,
