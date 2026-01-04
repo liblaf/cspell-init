@@ -12,14 +12,33 @@ export const DEFAULT_SETTINGS: CSpellSettings = {
   caseSensitive: false,
   enableGlobDot: true,
   ignorePaths: [
+    // CSpell
     ".cspell.*",
+    "cspell.*",
+    // lock files
     "*-lock.*",
     "*.lock",
+    "go.sum",
+    // images
+    "*.png",
+    // videos
+    "*.avi",
+    "*.mp4",
+    // 3D models
+    "*.glb",
+    "*.landmarks.json",
+    "*.msh",
+    "*.obj",
+    "*.ply",
+    "*.series",
+    "*.stl",
+    "*.vti",
+    "*.vtkhdf",
     "*.vtm",
     "*.vtp",
+    "*.vtr",
+    "*.vts",
     "*.vtu",
-    "cspell.*",
-    "go.sum",
   ],
   ignoreRandomStrings: true,
   maxFileSize: "500KB",

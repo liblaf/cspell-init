@@ -8,8 +8,8 @@ caseSensitive: false
 enableGlobDot: true
 ignorePaths:
   - .git/
-  - "*.lock"
   - cspell.*
+  - "*.lock"
 ignoreRandomStrings: true
 maxFileSize: 500KB
 useGitignore: true
@@ -21,3 +21,4 @@ words:
   - nuxt
   - stricli
   - uuidgen
+  - vtkhdf

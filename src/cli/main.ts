@@ -18,6 +18,7 @@ import { CONFIG_HEADER, DEFAULT_SETTINGS } from "../constants";
 import type { Context } from "./context";
 
 type Flags = {
+  exclude?: string[];
   saveConfig?: string;
   showPerfSummary?: boolean;
 };
@@ -40,13 +41,16 @@ async function* filterIgnorePaths(
   }
 }
 
-async function makeSettings(git: SimpleGit): Promise<CSpellSettings> {
+async function makeSettings(
+  git: SimpleGit,
+  flags: Flags,
+): Promise<CSpellSettings> {
   const settings: CSpellSettings = { ...DEFAULT_SETTINGS };
   const ignorePaths: string[] = [".git/"];
-  for await (const pattern of filterIgnorePaths(
-    git,
-    settings.ignorePaths as string[],
-  ))
+  for await (const pattern of filterIgnorePaths(git, [
+    ...(settings.ignorePaths as string[]),
+    ...(flags.exclude || []),
+  ]))
     ignorePaths.push(pattern);
   settings.ignorePaths = ignorePaths;
   return settings;
@@ -90,7 +94,7 @@ async function saveConfig(
   file: string,
   params: { [key: string]: any },
 ): Promise<void> {
-  const data = CONFIG_HEADER + YAML.stringify(params);
+  const data: string = CONFIG_HEADER + YAML.stringify(params);
   await fs.mkdir(path.dirname(file), { recursive: true });
   await fs.writeFile(file, data);
 }
@@ -103,7 +107,7 @@ export const main: Command<Context> = buildCommand({
     flags.saveConfig =
       flags.saveConfig ?? path.join(root, ".config", "cspell.config.yaml");
     await git.cwd(root);
-    const settings: CSpellSettings = await makeSettings(git);
+    const settings: CSpellSettings = await makeSettings(git, flags);
     const options: CSpellApplicationOptions = await makeOptions(
       git,
       settings,
@@ -126,6 +130,13 @@ export const main: Command<Context> = buildCommand({
   },
   parameters: {
     flags: {
+      exclude: {
+        kind: "parsed",
+        parse: String,
+        brief: "",
+        optional: true,
+        variadic: true,
+      },
       saveConfig: {
         kind: "parsed",
         parse: String,
@@ -137,6 +148,9 @@ export const main: Command<Context> = buildCommand({
         brief: "",
         optional: true,
       },
+    },
+    aliases: {
+      e: "exclude",
     },
   },
 });
