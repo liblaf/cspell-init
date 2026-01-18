@@ -41,6 +41,6 @@ export const DEFAULT_SETTINGS: CSpellSettings = {
     "*.vtu",
   ],
   ignoreRandomStrings: true,
-  maxFileSize: "500KB",
+  maxFileSize: "32KB",
   useGitignore: true,
 };
