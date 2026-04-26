@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 
-import { run } from "@stricli/core";
-import { app, context } from "../cli";
+import process from "node:process";
 
-await run(app, process.argv.slice(2), context);
+import { command } from "@/src/cli/command";
+
+await command.parseAsync(process.argv);

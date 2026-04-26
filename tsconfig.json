@@ -1,4 +1,10 @@
 {
   "extends": "@liblaf/config/tsconfig",
-  "exclude": ["bunup.config.ts", "dist/", "node_modules/"]
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "types": ["bun"]
+  },
+  "exclude": ["**/dist/", "**/node_modules/"]
 }
