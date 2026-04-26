@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+
 import type { StricliAutoCompleteContext } from "@stricli/auto-complete";
 import type { CommandContext } from "@stricli/core";
 

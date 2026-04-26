@@ -15,10 +15,15 @@ maxFileSize: 500KB
 useGitignore: true
 words:
   - bunup
-  - direnv
   - dotenv
   - liblaf
+  - mkdocs
   - nuxt
+  - oxfmt
+  - oxlint
+  - pipx
+  - rumdl
   - stricli
-  - uuidgen
+  - taiki
+  - tsgolint
   - vtkhdf

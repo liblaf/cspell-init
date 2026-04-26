@@ -1,18 +1,15 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+
 import type { Command } from "@stricli/core";
 import { buildCommand } from "@stricli/core";
 import { pathToFileURL } from "bun";
-import type {
-  CSpellApplicationOptions,
-  CSpellReporter,
-  CSpellSettings,
-  Issue,
-} from "cspell";
+import type { CSpellApplicationOptions, CSpellReporter, CSpellSettings, Issue } from "cspell";
 import { getDefaultReporter, lint } from "cspell";
 import { GlobMatcher } from "cspell-glob";
 import { type SimpleGit, simpleGit } from "simple-git";
 import YAML from "yaml";
+
 import { description } from "../../package.json";
 import { CONFIG_HEADER, DEFAULT_SETTINGS } from "../constants";
 import type { Context } from "./context";
@@ -23,13 +20,8 @@ type Flags = {
   showPerfSummary?: boolean;
 };
 
-async function* filterIgnorePaths(
-  git: SimpleGit,
-  ignorePaths: string[],
-): AsyncGenerator<string> {
-  const files: string[] = (await git.raw(["ls-files", "-z"]))
-    .split("\0")
-    .filter(Boolean);
+async function* filterIgnorePaths(git: SimpleGit, ignorePaths: string[]): AsyncGenerator<string> {
+  const files: string[] = (await git.raw(["ls-files", "-z"])).split("\0").filter(Boolean);
   for (const pattern of ignorePaths) {
     const matcher = new GlobMatcher([pattern], { mode: "exclude" });
     for (const file of files) {
@@ -41,10 +33,7 @@ async function* filterIgnorePaths(
   }
 }
 
-async function makeSettings(
-  git: SimpleGit,
-  flags: Flags,
-): Promise<CSpellSettings> {
+async function makeSettings(git: SimpleGit, flags: Flags): Promise<CSpellSettings> {
   const settings: CSpellSettings = { ...DEFAULT_SETTINGS };
   const ignorePaths: string[] = [".git/"];
   for await (const pattern of filterIgnorePaths(git, [
@@ -90,10 +79,7 @@ async function makeOptions(
   };
 }
 
-async function saveConfig(
-  file: string,
-  params: { [key: string]: any },
-): Promise<void> {
+async function saveConfig(file: string, params: { [key: string]: any }): Promise<void> {
   const data: string = CONFIG_HEADER + YAML.stringify(params);
   await fs.mkdir(path.dirname(file), { recursive: true });
   await fs.writeFile(file, data);
@@ -104,15 +90,10 @@ export const main: Command<Context> = buildCommand({
   async func(this: Context, flags: Flags): Promise<void> {
     const git: SimpleGit = simpleGit();
     const root: string = await git.revparse(["--show-toplevel"]);
-    flags.saveConfig =
-      flags.saveConfig ?? path.join(root, ".config", "cspell.config.yaml");
+    flags.saveConfig = flags.saveConfig ?? path.join(root, ".config", "cspell.config.yaml");
     await git.cwd(root);
     const settings: CSpellSettings = await makeSettings(git, flags);
-    const options: CSpellApplicationOptions = await makeOptions(
-      git,
-      settings,
-      flags,
-    );
+    const options: CSpellApplicationOptions = await makeOptions(git, settings, flags);
     const reporter: Required<CSpellReporter> = getDefaultReporter(
       { ...options, fileGlobs: ["."] },
       options,

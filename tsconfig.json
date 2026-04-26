@@ -1,4 +1,4 @@
 {
   "extends": "@liblaf/config/tsconfig",
-  "exclude": ["bunup.config.ts", "dist/", "node_modules/"]
+  "exclude": ["**/dist/", "**/node_modules/"]
 }
