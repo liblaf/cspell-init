@@ -2,6 +2,6 @@
 
 import process from "node:process";
 
-import { command } from "@/src/cli/command";
+import { program } from "@/src/cli/program";
 
-await command.parseAsync(process.argv);
+await program.parseAsync(process.argv);

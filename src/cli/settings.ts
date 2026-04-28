@@ -2,7 +2,7 @@ import type { CSpellSettings } from "cspell";
 import { GlobMatcher } from "cspell-glob";
 import type { SimpleGit } from "simple-git";
 
-import type { Options } from "./types";
+import type { Opts } from "./types";
 
 const DEFAULT_IGNORE_PATHS: string[] = [
   // CSpell
@@ -58,7 +58,7 @@ export async function* filterIgnorePaths(
   }
 }
 
-export async function makeSettings(git: SimpleGit, options: Options): Promise<CSpellSettings> {
+export async function makeSettings(git: SimpleGit, options: Opts): Promise<CSpellSettings> {
   const settings: CSpellSettings = { ...DEFAULT_SETTINGS };
   for await (const pattern of filterIgnorePaths(git, [
     ...DEFAULT_IGNORE_PATHS,

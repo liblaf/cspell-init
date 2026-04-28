@@ -1,6 +1,6 @@
 import path from "node:path";
 
-import { Command } from "@commander-js/extra-typings";
+import { program } from "@commander-js/extra-typings";
 import type { CSpellApplicationOptions, CSpellReporter, CSpellSettings, Issue } from "cspell";
 import { getDefaultReporter, lint } from "cspell";
 import { simpleGit } from "simple-git";
@@ -11,9 +11,9 @@ import { description, version } from "@/package.json";
 import { saveConfig } from "./config-file";
 import { makeOptions } from "./options";
 import { makeSettings } from "./settings";
-import type { Options } from "./types";
+import type { Opts } from "./types";
 
-export const command: Command<[], Options> = new Command()
+program
   .name("cspell-init")
   .description(description)
   .version(version)
@@ -21,13 +21,13 @@ export const command: Command<[], Options> = new Command()
   .option("-s, --save-config <file>")
   .option("--show-perf-summary")
   .option("--no-show-perf-summary")
-  .action(async (options: Options): Promise<void> => {
+  .action(async (opts: Opts): Promise<void> => {
     const git: SimpleGit = simpleGit();
     const root: string = await git.revparse(["--show-toplevel"]);
     process.chdir(root);
     await git.cwd(root);
-    const settings: CSpellSettings = await makeSettings(git, options);
-    const cSpellOptions: CSpellApplicationOptions = await makeOptions(git, settings, options);
+    const settings: CSpellSettings = await makeSettings(git, opts);
+    const options: CSpellApplicationOptions = await makeOptions(git, settings, opts);
     // cspell does not respect global gitignore, so we need to get the list of files ourselves.
     const files: string[] = (
       await git.raw(["ls-files", "--cached", "--others", "-z", "--exclude-standard"])
@@ -35,11 +35,11 @@ export const command: Command<[], Options> = new Command()
       .split("\0")
       .filter(Boolean);
     const reporter: Required<CSpellReporter> = getDefaultReporter(
-      { ...cSpellOptions, fileGlobs: files },
-      cSpellOptions,
+      { ...options, fileGlobs: files },
+      options,
     );
     const words: Set<string> = new Set();
-    await lint(files, cSpellOptions, {
+    await lint(files, options, {
       ...reporter,
       issue(issue: Issue): void {
         reporter.issue(issue);
@@ -47,8 +47,7 @@ export const command: Command<[], Options> = new Command()
       },
     });
     settings.words = Array.from(words).sort();
-    await saveConfig(
-      options.saveConfig ?? path.join(root, ".config", "cspell.config.yaml"),
-      settings,
-    );
+    await saveConfig(opts.saveConfig ?? path.join(root, ".config", "cspell.config.yaml"), settings);
   });
+
+export { program };
