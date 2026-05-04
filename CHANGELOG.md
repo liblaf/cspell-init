@@ -7,6 +7,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.6](https://github.com/liblaf/cspell-init/releases/tag/v0.2.6) - 2026-05-04
+
+### 🐛 Bug Fixes
+
+- disable CSpell cache for generated configs - [04a77d4](https://github.com/liblaf/cspell-init/commit/04a77d4982ad2a4fd37c826b7d51fbf4fca0d7f3) by [@liblaf](https://github.com/liblaf)
+
+### ❤️ Contributors
+
+- [@renovate[bot]](https://github.com/apps/renovate)
+- [@liblaf](https://github.com/liblaf)
+
 ## [v0.2.5](https://github.com/liblaf/cspell-init/releases/tag/v0.2.5) - 2026-04-26
 
 ### ✨ Features
@@ -15,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
+- [@liblaf-release-please[bot]](https://github.com/apps/liblaf-release-please) made their first contribution in [#57](https://github.com/liblaf/cspell-init/pull/57)
 - [@renovate[bot]](https://github.com/apps/renovate)
 - [@liblaf](https://github.com/liblaf)
 - [@liblaf[bot]](https://github.com/apps/liblaf)
