@@ -7,7 +7,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v0.2.6](https://github.com/liblaf/cspell-init/releases/tag/v0.2.6) - 2026-05-04
+## [v0.2.7](https://github.com/liblaf/cspell-init/releases/tag/v0.2.7) - 2026-06-13
+
+### 🐛 Bug Fixes
+
+- **(deps)** update dependency @commander-js/extra-typings to v15 (#78) - [61cad38](https://github.com/liblaf/cspell-init/commit/61cad38da7cc7fbecf26c1f9555fb800a1020eb2) by [@renovate[bot]](https://github.com/apps/renovate)
+- **(deps)** update dependency commander to v15 (#79) - [d818f26](https://github.com/liblaf/cspell-init/commit/d818f261b8908755c39c06879f644dde83b8c27e) by [@renovate[bot]](https://github.com/apps/renovate)
+
+### ❤️ Contributors
+
+- [@renovate[bot]](https://github.com/apps/renovate)
+- [@liblaf-copier[bot]](https://github.com/apps/liblaf-copier) made their first contribution in [#72](https://github.com/liblaf/cspell-init/pull/72)
+
+## [v0.2.6](https://github.com/liblaf/cspell-init/releases/tag/v0.2.6) - 2026-05-05
 
 ### 🐛 Bug Fixes
 
@@ -15,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
+- [@liblaf-release-please[bot]](https://github.com/apps/liblaf-release-please)
 - [@renovate[bot]](https://github.com/apps/renovate)
 - [@liblaf](https://github.com/liblaf)
 
