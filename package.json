@@ -51,7 +51,7 @@
     "commander": "^15.0.0",
     "cspell": "^10.0.0",
     "cspell-glob": "^10.0.0",
-    "simple-git": "^3.36.0",
+    "simple-git": "^4.0.0",
     "yaml": "^2.8.3"
   },
   "devDependencies": {
