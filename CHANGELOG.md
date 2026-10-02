@@ -7,7 +7,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Conventional Changelog](https://github.com/conventional-changelog/conventional-changelog-config-spec/blob/master/versions/2.2.0/README.md),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [v0.2.7](https://github.com/liblaf/cspell-init/releases/tag/v0.2.7) - 2026-06-13
+## [v0.2.8](https://github.com/liblaf/cspell-init/releases/tag/v0.2.8) - 2026-10-02
+
+### 🐛 Bug Fixes
+
+- **(deps)** update dependency simple-git to v4 (#152) - [95ffa3d](https://github.com/liblaf/cspell-init/commit/95ffa3d040b150ffa2a8e82e3f711b04c8a0715c) by [@renovate[bot]](https://github.com/apps/renovate)
+
+### ❤️ Contributors
+
+- [@renovate[bot]](https://github.com/apps/renovate)
+- [@liblaf-copier[bot]](https://github.com/apps/liblaf-copier)
+
+## [v0.2.7](https://github.com/liblaf/cspell-init/releases/tag/v0.2.7) - 2026-06-14
 
 ### 🐛 Bug Fixes
 
@@ -16,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### ❤️ Contributors
 
+- [@liblaf-release-please[bot]](https://github.com/apps/liblaf-release-please)
 - [@renovate[bot]](https://github.com/apps/renovate)
 - [@liblaf-copier[bot]](https://github.com/apps/liblaf-copier) made their first contribution in [#72](https://github.com/liblaf/cspell-init/pull/72)
 
