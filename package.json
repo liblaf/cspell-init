@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@liblaf/config": "0.3.2",
-    "@types/bun": "1.4.2",
+    "@types/bun": "1.4.3",
     "bunup": "0.16.32",
     "oxfmt": "0.72.0",
     "oxlint": "1.87.0",
